@@ -9,10 +9,29 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Bianca's Assignment 1!</h1>
+    <h1>Project Overview</h1>
     <div class="header">
-      <img src="Bboard.JPG" />
-      <p>Here is all the documentation for assignment 1!</p>
+      <p>This project explores how to create a blinking LED circuit controlled by an Arduino. 
+          The goal was to design a schematic, assemble the circuit on a breadboard, and write 
+          code to create a dynamic blinking pattern for three LEDs. For added creativity, I designed 
+          a cascading effect where the LEDs light up in sequence, giving the impression of movement.
+      </p>
+         
+          <h2>Hardware</h2>
+          <p>The hardware setup includes three LEDs connected to Arduino pins 9, 10, and 11 through resistors 
+            to control current flow. The resistor value was calculated to ensure the LEDs operate safely and efficiently.</p>
+          
+          <h3>Resistor Calculation</h3>
+          <ul>
+            <li><strong>Arduino Output Voltage:</strong> 5V</li>
+            <li><strong>LED Voltage Drop:</strong> 1.8V</li>
+            <li><strong>Voltage = V(arduino) - V(LED) -> 5 - 1.8 = </strong>3.2V</li>
+            <li><strong>Desired Current (I):</strong> 20mA = 0.02A</li>
+            <li><strong>Resistance (Ohm's Law):</strong> R = V / I = 3.2V / 0.02A = 160Ω</li>
+            <li><strong>Chosen Resistor:</strong> 220Ω (rounded to a standard value for safety)</li>
+          </ul>
+      
+
     </div>
   </body>
 </html>
