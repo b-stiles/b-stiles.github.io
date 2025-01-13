@@ -83,7 +83,44 @@
               with unique timing to create a dynamic visual effect.
             </p>
             <img src="Blink.gif" />
-      
+
+
+            <h2>Questions and Answers</h2>
+            <h4>1. Voltage Graph</h4>
+              <p>The voltage across each LED alternates between 0V (off) and 2.2V (on) during the 
+                blinking sequence. Below is a graph showing the timing for all three LEDs.</p>
+
+
+              <h4>2. How many LEDs could blink with only one on at a time?</h4>
+              <p>
+                If only one LED is on at any given time, the current limit of 200mA no longer applies since 
+                each LED would only draw 20mA sequentially. In this scenario, the Arduino could theoretically 
+                control all 14 digital pins, blinking up to:
+                </p>
+                <ul>
+                  <li><strong>14 LEDs</strong></li>
+                </ul>
+                <p>
+
+              <h4>3. How fast do you need to blink your LEDs until you can no longer tell they are blinking?</h4>
+              <p>
+                When I tested the LEDs, my eyes perceived them as continuously lit when they blinked with a cycle 
+                of **4ms ON and 4ms OFF**
+                <p>
+                In practice, I achieved this by setting the delay in the code to **4ms for ON** and **4ms for OFF**:
+                </p>
+                <pre><code>
+                digitalWrite(LED_PIN, HIGH); // Turn LED on
+                delay(4); // Wait 4ms
+                digitalWrite(LED_PIN, LOW); // Turn LED off
+                delay(4); // Wait 4ms
+                </code></pre>
+                <p>
+                During my tests, this configuration worked well to make the LEDs appear continuously lit, even though 
+                they were still blinking rapidly. This threshold may vary slightly based on lighting conditions or individual 
+                perception, but 4ms provided a reliable result.
+                </p>
+                    
 
     </div>
   </body>
