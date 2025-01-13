@@ -6,15 +6,14 @@
 
     <title>Bianca's HCDE 439 Physical Computing Page!</title>
 
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="a1-style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Project Overview</h1>
+    <h1>Blink! Project Overview</h1>
     <div class="header">
       <p>This project explores how to create a blinking LED circuit controlled by an Arduino. 
           The goal was to design a schematic, assemble the circuit on a breadboard, and write 
-          code to create a dynamic blinking pattern for three LEDs. For added creativity, I designed 
-          a cascading effect where the LEDs light up in sequence, giving the impression of movement.
+          code to create a dynamic blinking pattern for three LEDs. 
       </p>
          
           <h2>Hardware</h2>
@@ -30,6 +29,56 @@
             <li><strong>Resistance (Ohm's Law):</strong> R = V / I = 3.2V / 0.02A = 160Ω</li>
             <li><strong>Chosen Resistor:</strong> 220Ω (rounded to a standard value for safety)</li>
           </ul>
+
+          <h3>Schematic</h3>
+          <img src="schematic.jpeg" />
+
+
+          <h3>Circuit</h3>
+          <img src="Bboard.jpg" />
+
+
+          <h2>Arduino Code</h2>
+          <pre><code>
+            // Label LED pins
+            int green = 9;  // Pin for green LED
+            int red = 10;   // Pin for red LED
+            int yellow = 11; // Pin for yellow LED
+            
+            // The setup function runs once when you press reset or power the board
+            void setup() {
+              // Set all LED pins as OUTPUT
+              pinMode(green, OUTPUT);   // Set green LED as OUTPUT
+              pinMode(red, OUTPUT);     // Set red LED as OUTPUT
+              pinMode(yellow, OUTPUT);  // Set yellow LED as OUTPUT
+            }
+            
+            // The loop function runs over and over again forever
+            void loop() {
+              // Turn green LED ON and OFF
+              digitalWrite(green, HIGH); // Turn green LED on
+              delay(35);                 // Wait 35 ms
+              digitalWrite(green, LOW);  // Turn green LED off
+              delay(35);                 // Wait 35 ms
+            
+              // Turn red LED ON and OFF
+              digitalWrite(red, HIGH);   // Turn red LED on
+              delay(75);                 // Wait 75 ms
+              digitalWrite(red, LOW);    // Turn red LED off
+              delay(75);                 // Wait 75 ms
+            
+              // Turn yellow LED ON and OFF
+              digitalWrite(yellow, HIGH); // Turn yellow LED on
+              delay(35);                  // Wait 35 ms
+              digitalWrite(yellow, LOW);  // Turn yellow LED off
+              delay(35);                  // Wait 35 ms
+            }
+            </code></pre>
+            
+            <p>This code controls three LEDs (green, red, yellow) connected to Arduino pins 
+              9, 10, and 11. Each LED blinks independently with unique timing to create a dynamic 
+              visual effect.
+            </p>
       
 
     </div>
