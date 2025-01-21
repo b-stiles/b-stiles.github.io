@@ -30,8 +30,7 @@
       </p>
 
 
-      <h2>Schematic</h2>
-      <p><strong>Resistor Calculations:</strong></p>
+      <h3>Resistor Calculations</h3>
       <ul>
         <li>
           <strong>LED Resistors (220Ω):</strong> Calculated using Ohm’s Law:
@@ -47,6 +46,105 @@
           <strong>Button Resistor (10kΩ):</strong> A 10kΩ pull-down resistor is used with the button to ensure the pin reads <code>LOW</code> when the button is not pressed.
         </li>
       </ul>
+
+      <h3>Schematic</h3>
+      // [TODO add image of schematic]
+
+      <h3>Circuit</h3>
+      // [TODO insert still image of circuit]
+
+
+      <h2>Arduino Code</h2>
+      <pre><code>
+        int ledRed = 9;           // PWM pin for red LED
+        int ledYellow = 10;       // PWM pin for yellow LED
+        int ledGreen = 11;        // PWM pin for green LED
+        int button = 12;          // Button pin
+        
+        int brightness = 0;       // Variable to store the current LED brightness
+        int fadeAmount = 5;       // Amount to increase or decrease brightness
+        int buttonState = 0;      // Variable to store the current button state
+        int lastButtonState = 0;  // Variable to store the previous button state
+        
+        bool fading = false;      // Boolean to track if the LEDs are currently fading
+        int ledStage = 0;         // Variable to track the current LED (0: Green, 1: Yellow, 2: Red)
+        
+        // the setup routine runs once when you press reset:
+        void setup() {
+          pinMode(ledRed, OUTPUT);      // Set red LED pin as an output
+          pinMode(ledYellow, OUTPUT);   // Set yellow LED pin as an output
+          pinMode(ledGreen, OUTPUT);    // Set green LED pin as an output
+          pinMode(button, INPUT);       // Set button pin as an input
+        }
+        
+        // the loop routine runs over and over again forever:
+        void loop() {
+          buttonState = digitalRead(button);  // Read the current state of the button
+        
+          // Check for button press (rising edge)
+          if (buttonState == HIGH && lastButtonState == LOW) {
+            fading = true;    // Start the fading sequence
+            ledStage = 0;     // Start with green LED
+            brightness = 255; // Set brightness to maximum for the first LED
+          }
+        
+          lastButtonState = buttonState; // Update the last button state for the next loop iteration
+        
+          if (fading) {   // Check if fading is active
+            // Handle fading based on the current LED stage
+            if (ledStage == 0) {
+              analogWrite(ledGreen, brightness);  // Set brightness for green LED
+              analogWrite(ledYellow, 0);          // Turn off yellow LED
+              analogWrite(ledRed, 0);             // Turn off red LED
+            } else if (ledStage == 1) {
+              analogWrite(ledGreen, 0);           // Turn off green LED
+              analogWrite(ledYellow, brightness); // Set brightness for yellow LED
+              analogWrite(ledRed, 0);             // Turn off red LED
+            } else if (ledStage == 2) {
+              analogWrite(ledGreen, 0);           // Turn off green LED
+              analogWrite(ledYellow, 0);          // Turn off yellow LED
+              analogWrite(ledRed, brightness);    // Set brightness for red LED
+            }
+        
+            brightness -= fadeAmount;   // Decrease brightness for fading effect
+        
+            // Check if fading is complete for the current LED
+            if (brightness <= 0) {
+              brightness = 255; // Reset brightness for the next LED
+              ledStage++;       // Move to the next LED
+            }
+        
+            // Stop fading after red LED is complete
+            if (ledStage > 2) {
+              fading = false;             // Turn off fading
+              analogWrite(ledGreen, 0);   // Turn off green LED
+              analogWrite(ledYellow, 0);  // Turn off yellow LED
+              analogWrite(ledRed, 0);     // Turn off red LED
+            }
+        
+            delay(30); // Delay for smooth fading
+          }
+        }
+          </code></pre>
+
+
+      <h2>Final Product!</h2>
+      <p>[ TODO: Explanation of final product]
+      </p>
+      // [TODO: giff image of lights working]
+
+      <h2>Questions & Answers</h2>
+        <h4>1. Voltage Chart</h4>
+          <p>Voltage chart where the X axis is time and the Y axis is voltage. 3 lines representing the 
+            voltage across an LED with analogWrite(led, 64), analogWrite(led, 128), and analogWrite(led,255).
+          </p>
+          //[TODO insert image of voltage graph]
+
+        <h4>2. How long would your circuit run if powered by a 1200 mAh battery?</h4>
+          <p>[TODO: Question 2 answer]
+          </p>
+
+
     </div>
 
     <footer>
