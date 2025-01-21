@@ -123,26 +123,20 @@
       <h2>Questions & Answers</h2>
         <h4>1. Voltage Chart</h4>
           <img src="a2_graph.jpg" />
-          <p>
-            The chart above shows the voltage across an LED for different <code>analogWrite()</code> values:
-          </p>
           <ul>
             <li>
-              <strong>analogWrite(led, 64):</strong> The voltage is approximately 
-              <code>5V × (64 / 255) ≈ 1.25V</code>.
+              <strong>Yellow Line (<code>analogWrite(64)</code> - 25% Duty Cycle):</strong> 
+              The voltage across the LED is at <strong>1.8V</strong> (its forward voltage) for 25% of the time during each cycle.
             </li>
             <li>
-              <strong>analogWrite(led, 128):</strong> The voltage is approximately 
-              <code>5V × (128 / 255) ≈ 2.5V</code>.
+              <strong>Green Line (<code>analogWrite(128)</code> - 50% Duty Cycle):</strong> 
+              The voltage across the LED is at <strong>1.8V</strong> for 50% of the time during each cycle.
             </li>
             <li>
-              <strong>analogWrite(led, 255):</strong> The voltage is 
-              <code>5V × (255 / 255) = 5V</code>.
+              <strong>Pink Line (<code>analogWrite(255)</code> - 100% Duty Cycle):</strong> 
+              The voltage across the LED is constantly at <strong>1.8V</strong>.
             </li>
           </ul>
-          <p>
-            The X-axis of the chart represents time, while the Y-axis shows the voltage across the LED for the specified <code>analogWrite()</code> values.
-          </p>
           
 
     
