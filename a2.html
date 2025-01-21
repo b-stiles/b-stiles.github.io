@@ -56,72 +56,61 @@
 
       <h2>Arduino Code</h2>
       <pre><code>
-        int ledRed = 9;           // PWM pin for red LED
-        int ledYellow = 10;       // PWM pin for yellow LED
-        int ledGreen = 11;        // PWM pin for green LED
-        int button = 12;          // Button pin
-        
-        int brightness = 0;       // Variable to store the current LED brightness
-        int fadeAmount = 5;       // Amount to increase or decrease brightness
-        int buttonState = 0;      // Variable to store the current button state
-        int lastButtonState = 0;  // Variable to store the previous button state
-        
-        bool fading = false;      // Boolean to track if the LEDs are currently fading
-        int ledStage = 0;         // Variable to track the current LED (0: Green, 1: Yellow, 2: Red)
-        
-        // the setup routine runs once when you press reset:
+        int ledPins[] = {11, 10, 9};   // Array for LED pins (Green, Yellow, Red)
+        int button = 12;               // Button pin
+
+        int brightness = 0;            // Variable to store the current LED brightness
+        int fadeAmount = 5;            // Amount to increase or decrease brightness
+        int buttonState = 0;           // Variable to store the current button state
+        int lastButtonState = 0;       // Variable to store the previous button state
+
+        bool fading = false;           // Boolean to track if the LEDs are currently fading
+        int currentLED = 0;            // Variable to track the current LED being faded
+
         void setup() {
-          pinMode(ledRed, OUTPUT);      // Set red LED pin as an output
-          pinMode(ledYellow, OUTPUT);   // Set yellow LED pin as an output
-          pinMode(ledGreen, OUTPUT);    // Set green LED pin as an output
-          pinMode(button, INPUT);       // Set button pin as an input
+          // Set up LED pins as outputs
+          for (int i = 0; i < 3; i++) {
+            pinMode(ledPins[i], OUTPUT);
+          }
+          pinMode(button, INPUT);      // Set button pin as an input
         }
-        
-        // the loop routine runs over and over again forever:
+
         void loop() {
           buttonState = digitalRead(button);  // Read the current state of the button
-        
+
           // Check for button press (rising edge)
           if (buttonState == HIGH && lastButtonState == LOW) {
             fading = true;    // Start the fading sequence
-            ledStage = 0;     // Start with green LED
-            brightness = 255; // Set brightness to maximum for the first LED
+            currentLED = 0;   // Start with the green LED
+            brightness = 255; // Set brightness to maximum
           }
-        
+
           lastButtonState = buttonState; // Update the last button state for the next loop iteration
-        
+
           if (fading) {   // Check if fading is active
-            // Handle fading based on the current LED stage
-            if (ledStage == 0) {
-              analogWrite(ledGreen, brightness);  // Set brightness for green LED
-              analogWrite(ledYellow, 0);          // Turn off yellow LED
-              analogWrite(ledRed, 0);             // Turn off red LED
-            } else if (ledStage == 1) {
-              analogWrite(ledGreen, 0);           // Turn off green LED
-              analogWrite(ledYellow, brightness); // Set brightness for yellow LED
-              analogWrite(ledRed, 0);             // Turn off red LED
-            } else if (ledStage == 2) {
-              analogWrite(ledGreen, 0);           // Turn off green LED
-              analogWrite(ledYellow, 0);          // Turn off yellow LED
-              analogWrite(ledRed, brightness);    // Set brightness for red LED
+            for (int i = 0; i < 3; i++) {  // Iterate through each LED
+              if (i == currentLED) {
+                analogWrite(ledPins[i], brightness);  // Set brightness for the current LED
+              } else {
+                digitalWrite(ledPins[i], LOW);        // Turn off all other LEDs
+              }
             }
-        
+
             brightness -= fadeAmount;   // Decrease brightness for fading effect
-        
-            // Check if fading is complete for the current LED
-            if (brightness <= 0) {
-              brightness = 255; // Reset brightness for the next LED
-              ledStage++;       // Move to the next LED
+
+            if (brightness <= 0) { // Check if fading is complete for the current LED
+              brightness = 255;    // Reset brightness for the next LED
+              currentLED++;        // Move to the next LED
             }
-        
-            // Stop fading after red LED is complete
-            if (ledStage > 2) {
-              fading = false;             // Turn off fading
-              analogWrite(ledGreen, 0);   // Turn off green LED
-              analogWrite(ledYellow, 0);  // Turn off yellow LED
-              analogWrite(ledRed, 0);     // Turn off red LED
+
+            // Stop fading after the last LED (red) is complete
+            if (currentLED > 2) {
+              fading = false;  // End fading sequence
+              for (int i = 0; i < 3; i++) {
+                digitalWrite(ledPins[i], LOW);  // Turn off all LEDs
+              }
             }
-        
+
             delay(30); // Delay for smooth fading
           }
         }
