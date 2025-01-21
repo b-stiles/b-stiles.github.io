@@ -130,15 +130,15 @@
           </p>
           <ul>
             <li>
-              <strong>analogWrite(64):</strong> The voltage is approximately 
+              <strong>analogWrite(led, 64):</strong> The voltage is approximately 
               <code>5V × (64 / 255) ≈ 1.25V</code>.
             </li>
             <li>
-              <strong>analogWrite(128):</strong> The voltage is approximately 
+              <strong>analogWrite(led, 128):</strong> The voltage is approximately 
               <code>5V × (128 / 255) ≈ 2.5V</code>.
             </li>
             <li>
-              <strong>analogWrite(255):</strong> The voltage is 
+              <strong>analogWrite(led, 255):</strong> The voltage is 
               <code>5V × (255 / 255) = 5V</code>.
             </li>
           </ul>
@@ -154,24 +154,18 @@
         </p>
         <p><strong>Assumptions:</strong></p>
         <ul>
-          <li><strong>LED Current:</strong> Each LED draws approximately 20mA when fully on.</li>
-          <li><strong>Active LEDs:</strong> At any given time, only one LED is active.</li>
-          <li><strong>Battery Capacity:</strong> 1200mAh.</li>
+          <li>LED Current: Each LED draws approximately 20mA when fully on.</li>
+          <li>Active LEDs: At any given time, only one LED is active.</li>
+          <li>Battery Capacity: 1200mAh.</li>
         </ul>
         <p><strong>Total Current Draw:</strong></p>
-        <p>
-          Since only one LED is active at a time, the total current draw is approximately:
-        </p>
-        <pre><code>I<sub>total</sub> = 20mA = 0.02A</code></pre>
+        <p>Since only one LED is active at a time, the total current draw is approximately:</p>
+        <code>I<sub>total</sub> = 20mA = 0.02A</code>
         <p><strong>Battery Life:</strong></p>
-        <p>
-          The runtime is calculated using the formula:
-        </p>
-        <pre><code>Runtime (hours) = Battery Capacity (mAh) / Total Current Draw (mA)</code></pre>
-        <p>
-          Substituting the values:
-        </p>
-        <pre><code>Runtime = 1200 / 20 = 60 hours</code></pre>
+        <p>The runtime is calculated using the formula:</p>
+        <code>Runtime (hours) = Battery Capacity (mAh) / Total Current Draw (mA)</code>
+        <p>Substituting the values:</p>
+        <code>Runtime = 1200 / 20 = 60 hours</code>
         <p>
           Therefore, the circuit would run for approximately <strong>60 hours</strong> with a 1200mAh battery.
         </p>
