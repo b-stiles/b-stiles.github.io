@@ -127,11 +127,36 @@
           <p>Voltage chart where the X axis is time and the Y axis is voltage. 3 lines representing the 
             voltage across an LED with analogWrite(led, 64), analogWrite(led, 128), and analogWrite(led,255).
           </p>
-          //[TODO insert image of voltage graph]
+          <img src="analogWrite Chart.jpg" />
 
-        <h4>2. How long would your circuit run if powered by a 1200 mAh battery?</h4>
-          <p>[TODO: Question 2 answer]
-          </p>
+    
+        <h4>2. Battery Runtime Calculation</h4>
+        <p>
+          Assuming the circuit is powered by a 1200mAh battery and the only components drawing current are the LEDs, the runtime can be calculated as follows:
+        </p>
+        <p><strong>Assumptions:</strong></p>
+        <ul>
+          <li><strong>LED Current:</strong> Each LED draws approximately 20mA when fully on.</li>
+          <li><strong>Active LEDs:</strong> At any given time, only one LED is active.</li>
+          <li><strong>Battery Capacity:</strong> 1200mAh.</li>
+        </ul>
+        <p><strong>Total Current Draw:</strong></p>
+        <p>
+          Since only one LED is active at a time, the total current draw is approximately:
+        </p>
+        <pre><code>I<sub>total</sub> = 20mA = 0.02A</code></pre>
+        <p><strong>Battery Life:</strong></p>
+        <p>
+          The runtime is calculated using the formula:
+        </p>
+        <pre><code>Runtime (hours) = Battery Capacity (mAh) / Total Current Draw (mA)</code></pre>
+        <p>
+          Substituting the values:
+        </p>
+        <pre><code>Runtime = 1200 / 20 = 60 hours</code></pre>
+        <p>
+          Therefore, the circuit would run for approximately <strong>60 hours</strong> with a 1200mAh battery.
+        </p>
 
 
     </div>
