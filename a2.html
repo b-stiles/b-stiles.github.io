@@ -11,20 +11,46 @@
   <body>
     <h1>Fade Project Overview</h1>
     <div class="header">
-      <section id="introduction">
-        <h2>Introduction</h2>
-        <p>
-          This project simulates a traffic light system using Arduino. The green LED remains lit by default, representing a "go" signal. When the button is pressed, the traffic light transitions through a sequence: green fades out, yellow lights up and fades, followed by red. The sequence concludes by turning all LEDs off, and the system resets to green, awaiting the next button press.
-        </p>
-        <p>
-          The goals of this assignment were to:
-        </p>
-        <ul>
-          <li>Create an interactive circuit that simulates real-world behavior.</li>
-          <li>Use PWM to control LED brightness and simulate smooth fading.</li>
-          <li>Integrate user input through a button to trigger the sequence.</li>
-        </ul>
-      </section>
+
+      <h2>Introduction</h2>
+      <p>
+        For this project, I designed a system to simulate a traffic light using Arduino. The green LED stays lit by default, representing a "go" signal. When a button is pressed, the system initiates a sequence that transitions the traffic light through green, yellow, and red, with each LED fading smoothly before moving to the next. Once the red light fades out, the system resets to green and waits for the next button press.
+      </p>
+      <p>
+        The goals of this project were to:
+      </p>
+      <ul>
+        <li>Use digitalRead() to detect button presses.</li>
+        <li>Control LEDs with analogWrite() to create a fading effect.</li>
+        <li>Use a for loop for smooth transitions.</li>
+        <li>Ensure safe current levels with appropriate resistor calculations.</li>
+      </ul>
+
+      <h2>Schematic</h2>
+      <p>
+        <strong>Resistor Calculations:</strong>
+      </p>
+      <ul>
+        <li>
+          <strong>LED Resistors (220Ω):</strong> Calculated using Ohm’s Law:
+          <code>R = (V<sub>s</sub> - V<sub>f</sub>) / I</code>, where:
+          <ul>
+            <li><strong>V<sub>s</sub></strong>: Arduino supply voltage = 5V</li>
+            <li><strong>V<sub>f</sub></strong>: Forward voltage for red, yellow, and green LEDs = 1.8V</li>
+            <li><strong>I</strong>: Desired current = 20mA (0.02A)</li>
+          </ul>
+          Resulting in <code>R = (5 - 1.8) / 0.02 = 160Ω</code>. A 220Ω resistor was chosen for additional safety and to slightly reduce the current, prolonging LED lifespan.
+        </li>
+        <li>
+          <strong>Button Resistor (10kΩ):</strong> A 10kΩ pull-down resistor is used with the button to ensure the pin reads <code>LOW</code> when the button is not pressed. This prevents floating states, ensuring reliable input detection.
+        </li>
+      </ul>
+      <p>
+        The schematic reflects these components and their connections, ensuring the circuit operates safely and effectively. Each LED is connected to a 220Ω resistor in series, and the button uses a 10kΩ pull-down resistor.
+      </p>
+
+
+
     </div>
 
 
