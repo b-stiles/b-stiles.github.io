@@ -3,22 +3,20 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
-
     <title>Bianca's HCDE 439 Physical Computing Page!</title>
-
     <link href="a1-style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Fade Project Overview</h1>
-    <div class="header">
+    <header>
+      <h1>Fade Project Overview</h1>
+    </header>
 
+    <div class="content">
       <h2>Introduction</h2>
       <p>
         For this project, I designed a system to simulate a traffic light using Arduino. The green LED stays lit by default, representing a "go" signal. When a button is pressed, the system initiates a sequence that transitions the traffic light through green, yellow, and red, with each LED fading smoothly before moving to the next. Once the red light fades out, the system resets to green and waits for the next button press.
       </p>
-      <p>
-        The goals of this project were to:
-      </p>
+      <p>The goals of this project were to:</p>
       <ul>
         <li>Use digitalRead() to detect button presses.</li>
         <li>Control LEDs with analogWrite() to create a fading effect.</li>
@@ -27,9 +25,7 @@
       </ul>
 
       <h2>Schematic</h2>
-      <p>
-        <strong>Resistor Calculations:</strong>
-      </p>
+      <p><strong>Resistor Calculations:</strong></p>
       <ul>
         <li>
           <strong>LED Resistors (220Ω):</strong> Calculated using Ohm’s Law:
@@ -48,15 +44,12 @@
       <p>
         The schematic reflects these components and their connections, ensuring the circuit operates safely and effectively. Each LED is connected to a 220Ω resistor in series, and the button uses a 10kΩ pull-down resistor.
       </p>
-
-
-
     </div>
 
-
-
     <footer>
-      <p><a href="index.html">← Back to Homepage</a></p>
+      <p>
+        <a href="index.html" aria-label="Back to Homepage">← Back to Homepage</a>
+      </p>
     </footer>
   </body>
 </html>
