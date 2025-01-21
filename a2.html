@@ -24,6 +24,12 @@
         <li>Ensure safe current levels with appropriate resistor calculations.</li>
       </ul>
 
+      <h2>Hardware</h2>
+      <p>The hardware setup includes an Arduino Uno, three LEDs (red, yellow, green) connected to pins 9, 10, and 11, a 
+        button with a 10kΩ pull-down resistor, 220Ω resistors for the LEDs, a breadboard, and jumper wires for connections.
+      </p>
+
+
       <h2>Schematic</h2>
       <p><strong>Resistor Calculations:</strong></p>
       <ul>
@@ -35,15 +41,12 @@
             <li><strong>V<sub>f</sub></strong>: Forward voltage for red, yellow, and green LEDs = 1.8V</li>
             <li><strong>I</strong>: Desired current = 20mA (0.02A)</li>
           </ul>
-          Resulting in <code>R = (5 - 1.8) / 0.02 = 160Ω</code>. A 220Ω resistor was chosen for additional safety and to slightly reduce the current, prolonging LED lifespan.
+          Resulting in <code>R = (5 - 1.8) / 0.02 = 160Ω</code>. A 220Ω resistor was chosen for each LED (rounded to a standard value for safety).
         </li>
         <li>
-          <strong>Button Resistor (10kΩ):</strong> A 10kΩ pull-down resistor is used with the button to ensure the pin reads <code>LOW</code> when the button is not pressed. This prevents floating states, ensuring reliable input detection.
+          <strong>Button Resistor (10kΩ):</strong> A 10kΩ pull-down resistor is used with the button to ensure the pin reads <code>LOW</code> when the button is not pressed.
         </li>
       </ul>
-      <p>
-        The schematic reflects these components and their connections, ensuring the circuit operates safely and effectively. Each LED is connected to a 220Ω resistor in series, and the button uses a 10kΩ pull-down resistor.
-      </p>
     </div>
 
     <footer>
