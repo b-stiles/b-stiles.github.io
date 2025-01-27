@@ -43,6 +43,14 @@
       <img src="a3_graph.jpg" />
 
       <h4>3. 10-bit PWM and a 16-bit analog-to-digital converter instead</h4>
+      <p>If AnalogWrite is upgraded to 10-bit (0–1023) and AnalogRead to 16-bit (0–65,535), 
+        the map() function must be updated as follows:
+      </p>
+      <pre><code>mappedValue = map(inputValue, 0, 65535, 0, 1023);</code></pre>
+      <p>This change scales the 16-bit input to the 10-bit output, accommodating the 
+        increased resolution. The result is a circuit with greater precision for both 
+        sensing and output control.
+      </p>
 
 
     </div>
