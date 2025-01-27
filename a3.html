@@ -87,14 +87,12 @@
           int brightness2 = map(lightValue, 100, 500, 86, 170);   // Map for the medium range
           int brightness3 = map(lightValue, 100, 500, 171, 255);  // Map for the bright range
         
-          
-        
           // if-statements to control LEDs
          if (lightValue < 200) { // Dim light
             analogWrite(led1, brightness1); // Set red LED brightness for dim light
             analogWrite(led2, brightness1); // Set yellow LED brightness for dim light
             analogWrite(led3, brightness1); // Set green LED brightness for dim light
-          } else if (lightValue < 400) { // Medium light
+          } else if (lightValue < 400) {    // Medium light
             analogWrite(led1, brightness2); // Set red LED brightness for medium light
             analogWrite(led2, brightness2); // Set yellow LED brightness for medium light
             analogWrite(led3, brightness2); // Set green LED brightness for medium light
