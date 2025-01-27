@@ -34,7 +34,50 @@
       <img src="A3_Circuit.jpg" />
 
       <h2>Arduino Code</h2>
-      <pre><code>// paste code here</code></pre>
+      <pre><code>const int ldrPin = A0; // LDR connected to A0
+        const int led1 = 9;    // Red LED to pin 9
+        const int led2 = 10;    // Yellow LED to pin 10
+        const int led3 = 11;    // Green LED to pin 11
+        
+        // the setup routine runs once when you press reset:
+        void setup() {
+          Serial.begin(9600); // Initialize serial communication
+          pinMode(led1, OUTPUT);  // Set pin 9 (red LED) as an output
+          pinMode(led2, OUTPUT);  // Set pin 10 (yellow LED) as an output
+          pinMode(led3, OUTPUT);  // Set pin 11 (green LED) as an output
+        }
+        
+        void loop() {
+          int lightValue = analogRead(ldrPin); // Read LDR value 
+        
+          // Map lightValue to appropriate brightness levels for LEDs
+          int brightness1 = map(lightValue, 100, 500, 0, 85);     // Map for the dim range
+          int brightness2 = map(lightValue, 100, 500, 86, 170);   // Map for the medium range
+          int brightness3 = map(lightValue, 100, 500, 171, 255);  // Map for the bright range
+        
+          
+        
+          // if-statements to control LEDs
+         if (lightValue < 200) { // Dim light
+            analogWrite(led1, brightness1); // Set red LED brightness for dim light
+            analogWrite(led2, brightness1); // Set yellow LED brightness for dim light
+            analogWrite(led3, brightness1); // Set green LED brightness for dim light
+          } else if (lightValue < 400) { // Medium light
+            analogWrite(led1, brightness2); // Set red LED brightness for medium light
+            analogWrite(led2, brightness2); // Set yellow LED brightness for medium light
+            analogWrite(led3, brightness2); // Set green LED brightness for medium light
+          } else { // Bright light
+            analogWrite(led1, brightness3); // Set red LED brightness for bright light
+            analogWrite(led2, brightness3); // Set yellow LED brightness for bright light
+            analogWrite(led3, brightness3); // Set green LED brightness for bright light
+          }
+        
+          // Print the light intensity value to the serial monitor
+          Serial.print("Light Value: ");  // Print label
+          Serial.println(lightValue);     // Print the current light intensity value
+          delay(100);                     // Short delay (100ms) before reading again
+        }
+        </code></pre>
 
 
       <h2>Final Product!</h2>
