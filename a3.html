@@ -50,6 +50,16 @@
       <p>A <strong>220Ω resistor</strong> was chosen for each LED (rounded to the nearest standard value) to 
         ensure safe operation and limit current.</p>
 
+      <h4>Voltage Divider Resistor (10kΩ):</h4>
+      <p>The voltage divider consists of:</p>
+        <ul>
+          <li>A <strong>photoresistor</strong> (variable resistance based on light)</li>
+          <li>A <strong>10kΩ fixed resistor</strong></li>
+        </ul>
+        <p>This combination provides an appropriate voltage range for the Arduino's analog input (0–5V) when 
+          reading varying light conditions. The <strong>10kΩ resistor</strong> was chosen because it balances 
+          the typical resistance range of the photoresistor (1kΩ–10kΩ).</p>
+
 
       <h3>Schematic</h3>
       <img src="a3_schematic.jpg" />
