@@ -21,10 +21,34 @@
       </p>
 
       <h2>Hardware</h2>
-      <p>Harware description
-      </p>
+      <p>The hardware setup includes:</p>
+      <ul>
+        <li>An Arduino Uno</li>
+        <li>Three LEDs (red, yellow, green) connected to pins 9, 10, and 11</li>
+        <li>A photoresistor in a voltage divider circuit</li>
+        <li>A fixed 10kΩ resistor for the voltage divider</li>
+        <li>220Ω resistors for the LEDs</li>
+        <li>A breadboard and jumper wires for connections</li>
+      </ul>
 
       <h3>Resistor Calculations</h3>
+      <h4>LED Resistors (220Ω):</h4>
+      <p>Calculated using <strong>Ohm’s Law</strong>:</p>
+      <p>
+        <code>R = (V<sub>A</sub> - V<sub>L</sub>) / I</code>
+      </p>
+      <p>Where:</p>
+      <ul>
+        <li><code>V<sub>A</sub> = 5V</code> (Arduino voltage)</li>
+        <li><code>V<sub>L</sub> = 1.8V</code> (forward voltage for red, yellow, and green LEDs)</li>
+        <li><code>I = 20mA = 0.02A</code> (desired current)</li>
+      </ul>
+      <p>Substituting values:</p>
+      <p>
+        <code>R = (5 - 1.8) / 0.02 = 160Ω</code>
+      </p>
+      <p>A <strong>220Ω resistor</strong> was chosen for each LED (rounded to the nearest standard value) to 
+        ensure safe operation and limit current.</p>
 
 
       <h3>Schematic</h3>
