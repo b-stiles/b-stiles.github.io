@@ -47,7 +47,54 @@
 
       <h2>Arduino Code</h2>
       <pre><code>
-        [insert code here]
+        //  libraries
+        #include <IRremote.h>   // Calling the IR remote library
+        #include <Servo.h>      // Calling the Servo library
+
+        // Define pins
+        const int RECV_PIN = 11;       // IR Receiver pin
+        const int SERVO_PIN = 9;       // Servo control pin
+
+        // Create a Servo object named 'myServo' to control the SG90 servo motor
+        Servo myServo;
+
+        void setup() {
+          Serial.begin(9600);               // Start serial communication
+          IrReceiver.begin(RECV_PIN);       // Initialize IR receiver
+          myServo.attach(SERVO_PIN);        // Attach SG90 servo to pin 9
+
+          myServo.write(0);                 // Ensure the SG90 servo starts in the OFF position
+        }
+
+        void loop() {
+          if (IrReceiver.decode()) {        // Check for IR signal
+            Serial.println(IrReceiver.decodedIRData.decodedRawData, HEX);  // Print HEX code for debugging
+
+            unsigned long key_value = IrReceiver.decodedIRData.decodedRawData;  // Store received code
+
+            // Control Logic Based on Remote Buttons
+            switch (key_value) {
+              case 0xBA45FF00:               // Power button
+                myServo.write(0);            // Move SG90 servo to 0 degrees (OFF position)
+                break;
+
+              case 0xF30CFF00:               // Button 1 for LOW position
+                myServo.write(90);           // Move SG90 servo to 90 degrees (MID position)
+                break;
+
+              case 0xE718FF00:               // Button 2 for HIGH position
+                myServo.write(180);          // Move SG90 servo to 180 degrees (FULL position)
+                break;
+
+              default:
+                break;                      // Do nothing for unrecognized codes
+            }
+
+            IrReceiver.resume();            // Ready to receive the next signal
+          }
+        }
+
+
         </code></pre>
 
 
