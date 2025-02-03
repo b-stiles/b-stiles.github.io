@@ -123,11 +123,28 @@
       <p>To address the issue of occasional erroneous readings from the input device, we can implement 
         redundant sampling with majority voting. This method involves taking multiple readings and selecting 
         the most frequently occurring value, which helps eliminate outliers caused by the 1% error rate.</p>
+        <pre>readings = []
+          for i in range(10):
+              reading = get_sensor_value()  // Collect multiple readings
+              readings.append(reading)
+          
+          final_value = mode(readings)  // Use majority voting to determine the correct value<code>
       <br>
       <br>
       <h4>3. Handling Noisy Input </h4>
-      <p>answer
+      <p>To address noise that causes the input measurement to deviate randomly by ±10%, we can 
+        implement a moving average filter. This technique smooths out fluctuations by averaging the 
+        most recent readings.
       </p>
+      <pre>
+        window_size = 10
+        readings = []
+        
+        for i in range(window_size):
+            reading = get_sensor_value()  // Collect a batch of sensor readings
+            readings.append(reading)
+        
+        average_value = sum(readings) / window_size  // Apply moving average to reduce noisee<code>
 
 
     </div>
