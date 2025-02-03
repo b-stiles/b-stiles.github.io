@@ -13,33 +13,29 @@
     <div class="header">
       <h2>Introduction</h2>
       <p>
-        For Assignment 4, I built a circuit ...
+        For this project, I created a system using an IR Remote (input) and 
+        an SG90 Servo Motor (output). Both components require external libraries:
       </p>
-
-      <h2>Hardware</h2>
-      <p>The hardware setup includes:</p>
       <ul>
-        <li>An Arduino Uno</li>
-        <li>etc</li>
-        <li>etc</li>
-        <li>etc</li>
-        <li>etc</li>
-        <li>A breadboard and jumper wires for connections</li>
+        <li>IRremote.h for decoding remote control signals.</li>
+        <li>Servo.h for controlling the SG90 servo motor.</li>
       </ul>
-
-      <h3>Resistor Calculations</h3>
-      <h4>Resistors</h4>
-      <p>Calculated using Ohm’s Law:</p>
       <p>
-        <code>R = (V<sub>A</sub> - V<sub>L</sub>) / I</code>
+        The function of my motor works by rotating 
       </p>
-      
-      
-        <p>This combination provides ...continue explanation</p>
 
-
-      <h3>Schematic</h3>
+      <h2>Schematic</h2>
       <img src="Images/Place Holder.jpg" />
+      <p>
+        For this project, I created a system using an IR Remote (input) and 
+        an SG90 Servo Motor (output). Both components require external libraries:
+      </p>
+      <ul>
+        <li>IR Receiver: Connected to Pin 11 (signal), 5V (VCC), and GND.</li>
+        <li>Servo Motor (SG90): Connected to Pin 9 (signal), 3.3V, and GND since 
+          the IR receiver occupies the 5V pin. Pin 9 is used because it's a PWM-enabled 
+          pin required for controlling servo motors.</li>
+      </ul>
 
 
       <h3>Circuit</h3>
