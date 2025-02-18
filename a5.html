@@ -86,6 +86,29 @@
         </tr>
     </table>
 
+    <h2>Power & Current Justification</h2>
+    <p>The power consumption of the fan is calculated as follows:</p>
+    <pre>
+    P = V × I
+    P = 9V × 1A = 9W
+    </pre>
+    <p>The fan will run at a <strong>lower speed</strong> than when powered by 12V.</p>
+
+    <h2>Can the MOSFET Handle This Current?</h2>
+    <p>The MOSFET <strong>(DMT6009LCT)</strong> supports up to <strong>37.2A continuous current</strong>, while our circuit only requires ~1A.</p>
+    <pre>
+    Max MOSFET Drain Current (I_D) = 37.2A
+    Our Circuit Uses = ~1A
+    Usage Percentage = (1A / 37.2A) × 100 = ~2.7%
+    </pre>
+    <p><strong>Power Dissipation:</strong> The MOSFET's resistance when ON is <code>R_DS(on) ≈ 11.5mΩ</code>. The power lost as heat is:</p>
+    <pre>
+    P = I² × R_DS(on)
+    P = (1A)² × 11.5mΩ
+    P = 0.0115W
+    </pre>
+    <p><strong>Conclusion:</strong> The MOSFET operates safely and does not overheat.</p>
+
       <h2>Arduino Code</h2>
       <pre><code>
           #include <IRremote.h>  // Include the IR remote library
