@@ -72,3 +72,50 @@ h2 {
 .assignment p {
   margin-top: 0.5em;
 }
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  overflow-x: auto;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+th {
+  background-color: #333;
+  color: white;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+/* Responsive Table */
+@media screen and (max-width: 600px) {
+  body { 
+    padding: 1em; 
+  }
+  
+  .container {
+    padding: 15px;
+  }
+
+  table {
+    font-size: 14px;
+    overflow-x: scroll;
+    display: block;
+    white-space: nowrap;
+  }
+}
