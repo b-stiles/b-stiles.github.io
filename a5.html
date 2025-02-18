@@ -51,40 +51,43 @@
       </ul>
 
 
-    <h2>Expected Voltages & Currents</h2>
-    <p>Below are the expected voltages and currents at crucial spots in the circuit.</p>
-    <table>
-        <tr>
-            <th>Point in Circuit</th>
-            <th>Expected Voltage</th>
-            <th>Expected Current</th>
-        </tr>
-        <tr>
-            <td>Arduino Pin 5 (PWM to MOSFET Gate)</td>
-            <td>0V (LOW) / 5V (HIGH)</td>
-            <td>~0.1mA</td>
-        </tr>
-        <tr>
-            <td>MOSFET Drain (Motor Negative Terminal)</td>
-            <td>0V when ON, 9V when OFF</td>
-            <td>~0.8A - 1A</td>
-        </tr>
-        <tr>
-            <td>Fan Positive Terminal</td>
-            <td>9V</td>
-            <td>~0.8A - 1A</td>
-        </tr>
-        <tr>
-            <td>MOSFET Source (S) to Ground</td>
-            <td>0V</td>
-            <td>~0.8A - 1A</td>
-        </tr>
-        <tr>
-            <td>Flyback Diode (Reverse Voltage)</td>
-            <td>9V (when motor turns off)</td>
-            <td>Only conducts in short bursts</td>
-        </tr>
-    </table>
+      <div class="container">
+        <h2>Expected Voltages & Currents</h2>
+        <p>Below are the expected voltages and currents at crucial spots in the circuit.</p>
+    
+        <table>
+            <tr>
+                <th>Point in Circuit</th>
+                <th>Expected Voltage</th>
+                <th>Expected Current</th>
+            </tr>
+            <tr>
+                <td>Arduino Pin 5 (PWM to MOSFET Gate)</td>
+                <td>0V (LOW) / 5V (HIGH)</td>
+                <td>~0.1mA</td>
+            </tr>
+            <tr>
+                <td>MOSFET Drain (Motor Negative Terminal)</td>
+                <td>0V when ON, 9V when OFF</td>
+                <td>~0.8A - 1A</td>
+            </tr>
+            <tr>
+                <td>Fan Positive Terminal</td>
+                <td>9V</td>
+                <td>~0.8A - 1A</td>
+            </tr>
+            <tr>
+                <td>MOSFET Source (S) to Ground</td>
+                <td>0V</td>
+                <td>~0.8A - 1A</td>
+            </tr>
+            <tr>
+                <td>Flyback Diode (Reverse Voltage)</td>
+                <td>9V (when motor turns off)</td>
+                <td>Only conducts in short bursts</td>
+            </tr>
+        </table>
+    </div>
 
     <h2>Power & Current Justification</h2>
     <p>The power consumption of the fan is calculated as follows:</p>
