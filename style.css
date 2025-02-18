@@ -79,11 +79,11 @@ table {
   border-collapse: collapse;
   margin-top: 20px;
   background: white;
-  overflow-x: auto;
+  border: 1px solid #ddd; /* Adds a border around the entire table */
 }
 
 th, td {
-  border: 1px solid #ddd;
+  border: 1px solid #ddd; /* Adds borders around each cell */
   padding: 12px;
   text-align: left;
 }
@@ -92,29 +92,22 @@ th {
   background-color: #333;
   color: white;
   text-align: center;
+  font-weight: bold;
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #f9f9f9; /* Light gray alternate row */
 }
 
 tr:hover {
-  background-color: #ddd;
+  background-color: #ddd; /* Highlight row on hover */
 }
 
 /* Responsive Table */
 @media screen and (max-width: 600px) {
-  body { 
-    padding: 1em; 
-  }
-  
-  .container {
-    padding: 15px;
-  }
-
   table {
     font-size: 14px;
-    overflow-x: scroll;
+    overflow-x: auto;
     display: block;
     white-space: nowrap;
   }
