@@ -15,15 +15,15 @@
       <p>
         For Assignment 5, I built a circuit that controls a high-power DC fan using an N-MOSFET 
         transistor and an IR remote. The circuit separates logic power (Arduino) from motor power 
-        (external 12V supply). The fan operates in two states: ON and OFF, controlled wirelessly via 
-        an IR sensor using the IRremote library.
+        (external 12V supply). The fan operates at three speeds (Off, Low, and Medium), controlled 
+        wirelessly via an IR sensor using the IRremote library.
       </p>
 
       <h2>Hardware</h2>
       <p>The hardware setup includes:</p>
       <ul>
         <li>Arduino Uno</li>
-        <li>12V DC Fan</li>
+        <li>12V DC Motor with Fan atatchment</li>
         <li>N-MOSFET Transistor</li>
         <li>IR Receiver Module</li>
         <li>IR Remote Control</li>
@@ -34,11 +34,12 @@
 
 
       <h3>Schematic</h3>
-      <img src="Images/Place Holder.jpg" />
+      <img src="Images/A5_Schematic.jpg" />
 
 
       <h3>Circuit</h3>
-      <img src="Images/A5 Circuit.jpg" />
+      <img src="Images/A5_Circuit_pt1.jpg" />
+      <img src="Images/A5_Circuit_pt2.jpg" />
       <p>Explanation:</p>
       <ul>
         <li>N-MOSFET (DMT6009LCT): Acts as a switch to turn the fan ON or OFF based on the signal from the Arduino.</li>
@@ -49,13 +50,50 @@
         <li>IR Remote Control: Sends commands to the IR receiver to turn the fan ON or OFF wirelessly.</li>
       </ul>
 
+
+    <h2>Expected Voltages & Currents</h2>
+    <p>Below are the expected voltages and currents at crucial spots in the circuit.</p>
+    <table>
+        <tr>
+            <th>Point in Circuit</th>
+            <th>Expected Voltage</th>
+            <th>Expected Current</th>
+        </tr>
+        <tr>
+            <td>Arduino Pin 5 (PWM to MOSFET Gate)</td>
+            <td>0V (LOW) / 5V (HIGH)</td>
+            <td>~0.1mA</td>
+        </tr>
+        <tr>
+            <td>MOSFET Drain (Motor Negative Terminal)</td>
+            <td>0V when ON, 9V when OFF</td>
+            <td>~0.8A - 1A</td>
+        </tr>
+        <tr>
+            <td>Fan Positive Terminal</td>
+            <td>9V</td>
+            <td>~0.8A - 1A</td>
+        </tr>
+        <tr>
+            <td>MOSFET Source (S) to Ground</td>
+            <td>0V</td>
+            <td>~0.8A - 1A</td>
+        </tr>
+        <tr>
+            <td>Flyback Diode (Reverse Voltage)</td>
+            <td>9V (when motor turns off)</td>
+            <td>Only conducts in short bursts</td>
+        </tr>
+    </table>
+
       <h2>Arduino Code</h2>
       <pre><code>
           #include <IRremote.h>  // Include the IR remote library
 
           #define IR_PIN 12       // Pin for the IR receiver
           #define FAN_PIN 5     // PWM pin to control the MOSFET gate
-          #define ON_SPEED 50   // PWM value for on speed (0-255)
+          #define LOW_SPEED 50    // PWM value for low speed
+          #define MEDIUM_SPEED 100 // PWM value for medium speed
           
           int currentSpeed = 0;  // Store the current fan speed
           
@@ -81,18 +119,22 @@
                   break;
           
                 case 0xF30CFF00:  // Button 1 - Set motor to Low speed
-                  currentSpeed = ON_SPEED;
-                  Serial.println("Motor ON");
+                  currentSpeed = LOW_SPEED;
+                  Serial.println("Motor Speed: LOW");
+                  break;
+                
+                case 0xE718FF00:  // Button 2 - Set motor to Medium speed
+                  currentSpeed = MEDIUM_SPEED;
+                  Serial.println("Motor Speed: MEDIUM");
                   break;
           
           
                 default:
                   // Do nothing if an unrecognized button is pressed
-                  Serial.println("Unrecognized command received.");
                   break;
               }
               analogWrite(FAN_PIN, currentSpeed);
-              delay(200);  // Give time for IR processing to settle
+              delay(100);  // Give time for IR processing to settle
               IrReceiver.resume(); // Ready to receive the next signal
             }
           }
