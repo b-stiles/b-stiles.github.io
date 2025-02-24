@@ -7,7 +7,7 @@ let ledState = false; // Track LED state
 
 function setup() {
   setupSerial(); // Run our serial setup function (below)
-  createCanvas(710, 400);
+  createCanvas(windowWidth, windowHeight);
   background(0); // Black background
   strokeWeight(10); // Line thickness
   colorMode(HSB); // Use Hue-Saturation-Brightness color mode
@@ -51,6 +51,10 @@ function draw() {
 // Handle spacebar press
 function keyPressed() {
   if (key === " ") {
+    // Clear the board (reset background)
+    background(0);
+    console.log("Canvas cleared!");
+    
     ledState = true;
     port.write("LED_ON\n"); // Send signal to Arduino
   }
