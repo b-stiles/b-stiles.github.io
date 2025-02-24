@@ -41,8 +41,8 @@ function draw() {
       line(prevX, prevY, joyX, joyY);
       console.log(`Drawing line from (${prevX}, ${prevY}) to (${joyX}, ${joyY})`);
     }
-
-    // Update previous position for next frame
+  }
+  // Update previous position for next frame
   prevX = joyX;
   prevY = joyY;
 
