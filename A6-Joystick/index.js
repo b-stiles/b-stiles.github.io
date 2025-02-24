@@ -1,18 +1,18 @@
-const BAUD_RATE = 9600; // This should match the baud rate in your Arduino sketch
+const BAUD_RATE = 9600;     // This should match the baud rate in your Arduino sketch
 
-let port, connectBtn; // Declare global variables
+let port, connectBtn;       // Declare global variables
 let joyX = 355, joyY = 200; // Start at canvas center
-let buttonState = 0;
-let isDrawing = false; // Track if drawing mode is on
-let ledState = false; // Track LED state
+let buttonState = 0;        // Stores the current state of the joystick button
+let isDrawing = false;      // Track if drawing mode is on
+let ledState = false;       // Track LED state
 
 function setup() {
-  setupSerial(); // Run our serial setup function (below)
+  setupSerial();            // Run our serial setup function (below)
   createCanvas(windowWidth, windowHeight); // create canvas size
-  background(0); // Black background
-  strokeWeight(20); // Line thickness
-  colorMode(HSB); // Use Hue-Saturation-Brightness color mode
-  describe("A blank canvas where the user draws using a joystick.");
+  background(0);            // Set to black background
+  strokeWeight(20);         // thickness of the drawn lines
+  colorMode(HSB);           // Use Hue-Saturation-Brightness color mode for dynamic colors
+  describe("A blank canvas where the user draws using a joystick."); // Accessibility description
 }
 
 function draw() {
