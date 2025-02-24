@@ -16,7 +16,8 @@ function setup() {
 }
 
 function draw() {
-  const portIsOpen = checkPort(); // Check whether the port is open (see checkPort function below)
+  // Check whether the port is open (see checkPort function below)
+  const portIsOpen = checkPort(); 
   if (!portIsOpen) return; // If the port is not open, exit the draw loop
 
   let str = port.readUntil("\n"); // Read from the port until the newline
@@ -31,45 +32,59 @@ function draw() {
     let newButtonState = Number(arr[2]);      // Convert joystick button state to a number
 
     // Detect when button press to toggle drawing mode
-    if (newButtonState === 1 && buttonState === 0) {
-      isDrawing = !isDrawing; // Toggle drawing mode
-      console.log(`Drawing mode: ${isDrawing ? "ON" : "OFF"}`);
+    if (newButtonState === 1 && buttonState === 0) { // If the button was just pressed
+      isDrawing = !isDrawing; // Toggle drawing mode (on/off)
+      console.log(`Drawing mode: ${isDrawing ? "ON" : "OFF"}`); // Log the drawing state change
     }
-    buttonState = newButtonState; // Update button state
+    buttonState = newButtonState; // Update button state to track changes
   }
 
 
-  if (isDrawing) {
+  if (isDrawing) {  // Check if drawing mode is enabled
+    // Map joystick movement to color hue for dynamic color changes
     let lineHue = map(joyX - joyY, -width, width, 0, 360);
+    // Set stroke color using HSB (Hue-Saturation-Brightness)
     stroke(lineHue, 90, 90);
+    // Set the thickness of the drawn lines
     strokeWeight(10);
 
+    // Make sure previous position exists before drawing
     if (prevX !== undefined && prevY !== undefined) {
+      // Draw a line from the previous position to the new joystick position
       line(prevX, prevY, joyX, joyY);
     }
   }
 
+  // Store current X position as previous for the next frame
   prevX = joyX;
+  // Store current Y position as previous for the next frame
   prevY = joyY;
 
 }
 
 // Handle spacebar press
 function keyPressed() {
-  if (key === " ") {
-    // Clear the board (reset background)
+  // Check if the spacebar was pressed
+  if (key === " ") { 
+    // Clear the board (reset background to black)
     background(0);
+    // Log for debugging
     console.log("Canvas cleared!");
     
+    // Set LED state to ON
     ledState = true;
+    // Send signal to Arduino to turn the LED ON
     port.write("LED_ON\n"); // Send signal to Arduino
   }
 }
 
 // Handle spacebar release
 function keyReleased() {
+  // Check if the spacebar was released
   if (key === " ") {
+    // Set LED state to OFF
     ledState = false;
+    // Send signal to Arduino to turn the LED OFF
     port.write("LED_OFF\n"); // Send signal to Arduino
   }
 }
