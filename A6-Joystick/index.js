@@ -23,12 +23,14 @@ function draw() {
   if (str.length == 0) return; // If we didn't read anything, return.
 
   let arr = str.trim().split(","); // Trim whitespace and split on commas
+  
+  // make sure we have exactly three values (joystick X, Y, and button state)
   if (arr.length === 3) {
-    joyX = map(Number(arr[0]), 0, 1023, 0, width);
-    joyY = map(Number(arr[1]), 0, 1023, 0, height);
-    let newButtonState = Number(arr[2]);
+    joyX = map(Number(arr[0]), 0, 1023, 0, width);  // Map joystick X value to canvas width
+    joyY = map(Number(arr[1]), 0, 1023, 0, height); // Map joystick Y value to canvas height
+    let newButtonState = Number(arr[2]);      // Convert joystick button state to a number
 
-    // Detect button press to toggle drawing mode
+    // Detect when button press to toggle drawing mode
     if (newButtonState === 1 && buttonState === 0) {
       isDrawing = !isDrawing; // Toggle drawing mode
       console.log(`Drawing mode: ${isDrawing ? "ON" : "OFF"}`);
