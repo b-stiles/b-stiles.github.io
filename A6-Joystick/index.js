@@ -3,13 +3,14 @@ const BAUD_RATE = 9600; // This should match the baud rate in your Arduino sketc
 let port, connectBtn; // Declare global variables
 let joyX = 355, joyY = 200; // Start at canvas center
 let buttonState = 0;
+let isDrawing = false; // Track if drawing mode is on
 let ledState = false; // Track LED state
 
 function setup() {
   setupSerial(); // Run our serial setup function (below)
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight); // create canvas size
   background(0); // Black background
-  strokeWeight(10); // Line thickness
+  strokeWeight(20); // Line thickness
   colorMode(HSB); // Use Hue-Saturation-Brightness color mode
   describe("A blank canvas where the user draws using a joystick.");
 }
@@ -25,24 +26,27 @@ function draw() {
   if (arr.length === 3) {
     joyX = map(Number(arr[0]), 0, 1023, 0, width);
     joyY = map(Number(arr[1]), 0, 1023, 0, height);
-    buttonState = Number(arr[2]); // Joystick button press state
+    let newButtonState = Number(arr[2]);
 
-    console.log("Button State from Arduino:", buttonState); // Debugging
+    // Detect button press to toggle drawing mode
+    if (newButtonState === 1 && buttonState === 0) {
+      isDrawing = !isDrawing; // Toggle drawing mode
+      console.log(`Drawing mode: ${isDrawing ? "ON" : "OFF"}`);
+    }
+    buttonState = newButtonState; // Update button state
   }
 
 
-  // DRAWING FIX: Only draw if button is pressed
-  if (buttonState === 1) {
-    let lineHue = map(joyX - joyY, -width, width, 0, 360); // Dynamic colors
+  if (isDrawing) {
+    let lineHue = map(joyX - joyY, -width, width, 0, 360);
     stroke(lineHue, 90, 90);
-    strokeWeight(10); // Line thickness
+    strokeWeight(10);
 
     if (prevX !== undefined && prevY !== undefined) {
       line(prevX, prevY, joyX, joyY);
-      console.log(`Drawing line from (${prevX}, ${prevY}) to (${joyX}, ${joyY})`);
     }
   }
-  // Update previous position for next frame
+
   prevX = joyX;
   prevY = joyY;
 
