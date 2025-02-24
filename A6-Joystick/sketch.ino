@@ -1,37 +1,45 @@
-// Joystick and Web Interaction
+const int ledPin = 9;  // LED connected to pin 9
+const int VRx = A0;    // Joystick X-axis (analog)
+const int VRy = A1;    // Joystick Y-axis (analog)
+const int button = 2;  // Joystick button (digital)
 
-// Joystick pins
-const int joyX = A0;
-const int joyY = A1;
-const int joyButton = 2;
-const int ledPin = 9;
+// Variables to store joystick readings
+int xValue, yValue, buttonState;
 
 void setup() {
-  Serial.begin(9600); // Start serial communication
-  pinMode(joyButton, INPUT_PULLUP);
+  Serial.begin(9600); // Match this with p5.js
   pinMode(ledPin, OUTPUT);
+  pinMode(button, INPUT_PULLUP); // Joystick button with pull-up resistor
+  digitalWrite(ledPin, LOW); // Start with LED off
 }
 
 void loop() {
-  int xValue = analogRead(joyX); // Read X-axis
-  int yValue = analogRead(joyY); // Read Y-axis
-  int buttonState = digitalRead(joyButton); // Read button state
+  // Read joystick analog values (0-1023)
+  xValue = analogRead(VRx);
+  yValue = analogRead(VRy);
+  
+  // Read joystick button (LOW when pressed, HIGH when not)
+  buttonState = digitalRead(button) == LOW ? 1 : 0;
 
-  // Send data as comma-separated values for p5.js
+  // Send joystick and button data as CSV format
   Serial.print(xValue);
   Serial.print(",");
   Serial.print(yValue);
   Serial.print(",");
   Serial.println(buttonState);
 
-  // Check for incoming data from webpage
+  // Check for Serial input from p5.js to control LED
   if (Serial.available() > 0) {
-    char command = Serial.read(); // Read command from p5.js
-    if (command == '1') {
+    String command = Serial.readStringUntil('\n'); // Read incoming message
+    command.trim(); // Clean up input
+
+    if (command == "LED_ON") {
       digitalWrite(ledPin, HIGH); // Turn LED ON
-    } else if (command == '0') {
+    } 
+    else if (command == "LED_OFF") {
       digitalWrite(ledPin, LOW); // Turn LED OFF
     }
   }
-  delay(100); // Small delay for stability
+
+  delay(50); // Small delay to stabilize readings
 }

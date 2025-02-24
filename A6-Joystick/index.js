@@ -1,17 +1,17 @@
 const BAUD_RATE = 9600; // This should match the baud rate in your Arduino sketch
 
 let port, connectBtn; // Declare global variables
-let xValue = 0;
-let yValue = 0;
-let buttonState = 1;
-let ledState = false;
+let joyX = 355, joyY = 200; // Start at canvas center
+let buttonState = 0;
+let ledState = false; // Track LED state
 
 function setup() {
   setupSerial(); // Run our serial setup function (below)
-
-  // Create a canvas that is the size of our browser window.
-  // windowWidth and windowHeight are p5 variables
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(710, 400);
+  background(0); // Black background
+  strokeWeight(10); // Line thickness
+  colorMode(HSB); // Use Hue-Saturation-Brightness color mode
+  describe("A blank canvas where the user draws using a joystick.");
 }
 
 function draw() {
@@ -22,27 +22,49 @@ function draw() {
   if (str.length == 0) return; // If we didn't read anything, return.
 
   let arr = str.trim().split(","); // Trim whitespace and split on commas
+  if (arr.length === 3) {
+    joyX = map(Number(arr[0]), 0, 1023, 0, width);
+    joyY = map(Number(arr[1]), 0, 1023, 0, height);
+    buttonState = Number(arr[2]); // Joystick button press state
 
-  // Convert values to numbers and map them to screen dimensions
-  xValue = map(Number(arr[0]), 0, 1023, 0, windowWidth);
-  yValue = map(Number(arr[1]), 0, 1023, 0, windowHeight);
-  buttonState = Number(arr[2]);
+    console.log("Button State from Arduino:", buttonState); // Debugging
+  }
 
-  background(220);
-  fill(0);
-  textSize(16);
-  text(`Joystick X: ${xValue}`, 20, 50);
-  text(`Joystick Y: ${yValue}`, 20, 80);
-  text(`Button State: ${buttonState}`, 20, 110);
-  text(`LED: ${ledState ? "ON" : "OFF"}`, 20, 140);
 
-  // Draw joystick position
-  fill(255, 0, 0);
-  ellipse(xValue, yValue, 20, 20);
+  // DRAWING FIX: Only draw if button is pressed
+  if (buttonState === 1) {
+    let lineHue = map(joyX - joyY, -width, width, 0, 360); // Dynamic colors
+    stroke(lineHue, 90, 90);
+    strokeWeight(10); // Line thickness
+
+    if (prevX !== undefined && prevY !== undefined) {
+      line(prevX, prevY, joyX, joyY);
+      console.log(`Drawing line from (${prevX}, ${prevY}) to (${joyX}, ${joyY})`);
+    }
+
+    // Update previous position for next frame
+  prevX = joyX;
+  prevY = joyY;
+
+}
+
+// Handle spacebar press
+function keyPressed() {
+  if (key === " ") {
+    ledState = true;
+    port.write("LED_ON\n"); // Send signal to Arduino
+  }
+}
+
+// Handle spacebar release
+function keyReleased() {
+  if (key === " ") {
+    ledState = false;
+    port.write("LED_OFF\n"); // Send signal to Arduino
+  }
 }
 
 // Three helper functions for managing the serial connection.
-
 function setupSerial() {
   port = createSerial();
 
