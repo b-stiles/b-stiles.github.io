@@ -12,13 +12,13 @@
     <h1>Study Buddy Lamp - Final Project</h1>
     <div class="section"></div>
       <h2>📌 Concept Description</h2>
-          <p>The <strong>Study Buddy Lamp</strong> is a smart LED-based lamp designed to help 
+          <p>The Study Buddy Lamp is a smart LED-based lamp designed to help 
             students manage their study time effectively and prevent burnout.</p>
           <ul>
               <li>💡 <strong>Set a study duration</strong> using an IR remote.</li>
-              <li>🔄 <strong>Automatic breaks</strong> every 30 minutes, with the lamp blinking before stopping for a 5 minute break.</li>
+              <li>🔄 <strong>Automatic breaks</strong> every 30 minutes, with the lamp blinking 3 times before stopping for a 5 minute break.</li>
               <li>📺 <strong>LCD Display</strong> shows study progress, breaks, and the total study time.</li>
-              <li>🛑 Users can <strong>cancel the session anytime</strong> using the IR remote.</li>
+              <li>🛑 Users can cancel the session anytime using the IR remote.</li>
           </ul>
     </div>
 
@@ -37,7 +37,8 @@
           <li>Wood glue</li>
           <li>Paper</li>
       </ul>
-      <p><strong>How the Code Works:</strong></p>
+
+      <h3>How the Code Works:</h3>
       <ol>
           <li>Uses the Arduino funtion millis() which keeps track of number of milliseconds since the program started</li>
           <li>millis() allows for IR Remote input while tracking time</li>
@@ -53,13 +54,13 @@
   <div class="section">
     <h2>📜 Circuit Diagram & Schematic</h2>
     <p>The schematic below shows how the components are connected.</p>
-    <img src="your-schematic-image.png" alt="Schematic Diagram" width="100%">
+    
     <p><i>placeholder for actual schematic image.</i></p>
   </div>
   
   <div class="section">
     <h2>💻 Arduino Code</h2>
-    <p>The following is the full working Arduino code:</p>
+    <p>The following is the full Arduino code:</p>
     <div class="code-block">
         <pre>
           [code here]
@@ -77,7 +78,7 @@
   <ul>
       <li><strong>LCD Not Displaying?</strong> Fixed by improving timing and using correct pins.</li>
       <li><strong>LED Not Turning Off?</strong> Fixed by replacing the transistor.</li>
-      <li><strong>Breaks Not Triggering?</strong> Adjusted `millis()` logic to correctly detect time intervals.</li>
+      <li><strong>Breaks Not Triggering?</strong> Adjusted <code>millis()</code> logic to correctly detect time intervals.</li>
   </ul>
 </div>
 
