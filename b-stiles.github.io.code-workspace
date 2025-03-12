@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Downloads/p5.webserial-main 3"
+		},
+		{
+			"path": "../Downloads/hcde439-master 3"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "b-stiles.github.io"
+	}
+}

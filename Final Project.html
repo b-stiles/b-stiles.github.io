@@ -9,12 +9,77 @@
     <link href="a1-style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Final Project Proposal</h1>
-    
-    <img src="Images/Final_Project_PP.jpg" />
-      
-        
+    <h1>Study Buddy Lamp - Final Project</h1>
+    <div class="section"></div>
+      <h2>📌 Concept Description</h2>
+          <p>The <strong>Study Buddy Lamp</strong> is a smart LED-based lamp designed to help 
+            students manage their study time effectively and prevent burnout.</p>
+          <ul>
+              <li>💡 <strong>Set a study duration</strong> using an IR remote.</li>
+              <li>🔄 <strong>Automatic breaks</strong> every 30 minutes, with the lamp blinking before stopping for a 5 minute break.</li>
+              <li>📺 <strong>LCD Display</strong> shows study progress, breaks, and the total study time.</li>
+              <li>🛑 Users can <strong>cancel the session anytime</strong> using the IR remote.</li>
+          </ul>
+    </div>
 
+    <div class="section">
+      <h2>⚙️ Technical Implementation</h2>
+      <p>The Study Buddy Lamp uses the following Materials:</p>
+      <ul>
+          <li><strong>Input:</strong> IR Remote and Receiver</li>
+          <li><strong>Processing:</strong> Arduino Microcontroller/Breadboard</li>
+          <li><strong>Output:</strong> LED Strip, LCD Display</li>
+          <li>External Power Supply (12V)</li>
+          <li>Transistor - to control voltage to LED strip</li>
+          <li>Resistor - to limit current</li>
+          <li>Jumper wires (for connecting LED strip)</li>
+          <li>Basswood</li>
+          <li>Wood glue</li>
+          <li>Paper</li>
+      </ul>
+      <p><strong>How the Code Works:</strong></p>
+      <ol>
+          <li>Uses the Arduino funtion millis() which keeps track of number of milliseconds since the program started</li>
+          <li>millis() allows for IR Remote input while tracking time</li>
+          <li>Records the start time of each study session after user enters desired minutes to study for and clicks enter button (sessionStartTime).</li>
+          <li>Tracks each minute separately (minuteStart inside startStudySession()).</li>
+          <li>Checks for user input every second while counting minutes - incase session is ended early..</li>
+          <li>Trigger breaks every 30 minutes</li>
+          <li>Increment the studied minutes counter (elapsedMinutes++).</li>
+          <li>Display the total studied time at the end..</li>
+      </ol>
+  </div>
+      
+  <div class="section">
+    <h2>📜 Circuit Diagram & Schematic</h2>
+    <p>The schematic below shows how the components are connected.</p>
+    <img src="your-schematic-image.png" alt="Schematic Diagram" width="100%">
+    <p><i>placeholder for actual schematic image.</i></p>
+  </div>
+  
+  <div class="section">
+    <h2>💻 Arduino Code</h2>
+    <p>The following is the full working Arduino code:</p>
+    <div class="code-block">
+        <pre>
+          [code here]
+        </pre>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🎥 Demo Video</h2>
+    <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1064530711?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Untitled"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+</div>
+
+<div class="section">
+  <h2>🛠 Challenges & Solutions</h2>
+  <ul>
+      <li><strong>LCD Not Displaying?</strong> Fixed by improving timing and using correct pins.</li>
+      <li><strong>LED Not Turning Off?</strong> Fixed by replacing the transistor.</li>
+      <li><strong>Breaks Not Triggering?</strong> Adjusted `millis()` logic to correctly detect time intervals.</li>
+  </ul>
+</div>
 
     <footer>
         <p><a href="index.html">← Back to Homepage</a></p>
